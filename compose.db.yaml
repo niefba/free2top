@@ -1,0 +1,23 @@
+# PostgreSQL database used by application.
+# The `db-data` volume persists the
+# database data between container restarts.
+services:
+  db:
+    container_name: db_free2top
+    image: postgres
+    restart: always
+    env_file:
+      - ./restApi/.env
+    user: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    expose:
+      - 5432
+    healthcheck:
+      test: [ "CMD", "pg_isready" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db-data:
