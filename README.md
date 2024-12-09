@@ -17,3 +17,7 @@ This command generates a migration file in the src/migration directory:
 Edit the generated migration file to define the SQL query and run the migration:
 
     docker compose -f .\compose.migration.yaml up --build
+
+## Environnement windows Node
+
+    fnm env --use-on-cd | Out-String | Invoke-Expression
