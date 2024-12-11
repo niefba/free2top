@@ -18,6 +18,6 @@ Edit the generated migration file to define the SQL query and run the migration:
 
     docker compose -f .\compose.migration.yaml up --build
 
-## Environnement windows Node
+## Environment for node.js/npm on Windows
 
     fnm env --use-on-cd | Out-String | Invoke-Expression

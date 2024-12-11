@@ -26,7 +26,7 @@ export async function signup(state: SigninFormState, formData: FormData) {
     })
     console.log(response);
     if (response.ok) {
-      redirect('/profile')
+      redirect('/dashboard')
     } else {
         // Handle errors
         return {
