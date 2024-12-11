@@ -6,10 +6,14 @@ import { userRouter } from "./routes/user.routes";
 import { courseRouter } from "./routes/course.routes";
 import "reflect-metadata";
 import { errorHandler } from "./middleware/errorHandler";
+
 dotenv.config();
 
+const cors = require('cors');
 const app = express();
 app.use(express.json());
+app.use(cors({ origin: 'http://localhost:3000' , credentials :  true}));
+
 //app.use(errorHandler);
 const { PORT = 3000 } = process.env;
 app.use("/auth", userRouter);

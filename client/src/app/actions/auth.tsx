@@ -1,10 +1,10 @@
-import { SigninFormSchema, FormState } from '@/app/lib/definitions'
-import router from 'next/router'
- 
-export async function signup(state: FormState, formData: FormData) {
+import { SigninFormSchema, SigninFormState } from '@/app/lib/definitions'
+import { redirect } from 'next/navigation';
+
+export async function signup(state: SigninFormState, formData: FormData) {
     const name = formData.get('name');
     const password = formData.get('password');
-
+    
   // Validate form fields
   const validatedFields = SigninFormSchema.safeParse({
     name,
@@ -19,16 +19,18 @@ export async function signup(state: FormState, formData: FormData) {
   }
  
   // Call the provider or db to create a user...
-  const response = await fetch('/api/auth/login', {
+  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password }),
     })
- 
+    console.log(response);
     if (response.ok) {
-        router.push('/profile')
+      redirect('/profile')
     } else {
         // Handle errors
-        router.push('/error')
+        return {
+          message: 'Vos identifiants sont incorrects. Vérifiez le nom d\'utilisateur et le mot de passe saisis puis recommencez.'
+        }
     }
 }
