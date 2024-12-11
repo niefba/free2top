@@ -19,7 +19,7 @@ export async function signup(state: SigninFormState, formData: FormData) {
   }
  
   // Call the provider or db to create a user...
-  const response = await fetch(`${process.env.REACT_APP_API_URL}/auth/login`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password }),
