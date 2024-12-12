@@ -1,6 +1,5 @@
 import Image from "next/image";
 import {SigninForm} from './ui/signin-form'
-import free2top from '../../public/free2top.svg'
 
 export default function Home() {
   return (
@@ -9,10 +8,10 @@ export default function Home() {
         
         <Image
           className="dark:invert justify-center"
-          src={free2top}
+          src="free2top.svg"
           alt="Free2Top logo"
           width={180}
-          height={38}
+          height={180}
           priority
         />
         

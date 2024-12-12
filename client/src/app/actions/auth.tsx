@@ -1,7 +1,9 @@
+'use server'
+
 import { SigninFormSchema, SigninFormState } from '@/app/lib/definitions'
 import { redirect } from 'next/navigation';
 
-export async function signup(state: SigninFormState, formData: FormData) {
+export async function signin(state: SigninFormState, formData: FormData) {
     const name = formData.get('name');
     const password = formData.get('password');
     
@@ -17,9 +19,9 @@ export async function signup(state: SigninFormState, formData: FormData) {
       errors: validatedFields.error.flatten().fieldErrors,
     }
   }
- 
+  
   // Call the provider or db to create a user...
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
+  const response = await fetch(`${process.env.API_URL}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password }),

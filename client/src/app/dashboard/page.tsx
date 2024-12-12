@@ -8,7 +8,7 @@ interface Course {
   }
 
 export default async function Dashboard() {
-    const courses = await fetch('http://server_free2top:4000/api/courses')
+    const courses = await fetch(`${process.env.API_URL}/api/courses`)
     const {data} = await courses.json()
     
     return (

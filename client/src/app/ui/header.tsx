@@ -1,7 +1,6 @@
 'use client'
 
 import Image from "next/image";
-import free2top from '../../../public/free2top.svg'
 import { usePathname } from 'next/navigation'
 import Link from "next/link";
 
@@ -15,9 +14,10 @@ export function Header() {
             <Link href="/" className="flex flex-row items-center">
                 <Image
                         className="invert justify-center"
-                        src={free2top}
+                        src="free2top.svg"
                         alt="Free2Top logo"
                         width={45}
+                        height={45}
                         priority
                         />
                 <span className="text-white">Free2Top</span>
