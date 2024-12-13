@@ -8,6 +8,7 @@ export const authentification = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log(req.headers)
   const header = req.headers.authorization;
   if (!header) {
     return res.status(401).json({ message: "Unauthorized" });

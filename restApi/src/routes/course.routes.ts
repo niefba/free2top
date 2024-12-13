@@ -10,7 +10,9 @@ Router.get("/courses",
   //asynchandler(authentification), 
   asynchandler(CourseController.getAllCourses)
 );
-Router.post("/courses", asynchandler(authentification), asynchandler(CourseController.createCourse));
+Router.post("/courses",
+  asynchandler(authentification),
+  asynchandler(CourseController.createCourse));
 
 Router.put(
   "/courses/:id",

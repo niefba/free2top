@@ -2,6 +2,8 @@
 
 import { SigninFormSchema, SigninFormState } from '@/app/lib/definitions'
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers'
+
 
 export async function signin(state: SigninFormState, formData: FormData) {
     const name = formData.get('name');
@@ -26,13 +28,16 @@ export async function signin(state: SigninFormState, formData: FormData) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, password }),
     })
-    console.log(response);
-    if (response.ok) {
+    
+    const data = await response.json();
+    if (response.ok && data.token) {
+      // Save the token in a cookie
+      (await cookies()).set('authToken', data.token)
       redirect('/dashboard')
     } else {
-        // Handle errors
-        return {
-          message: 'Vos identifiants sont incorrects. Vérifiez le nom d\'utilisateur et le mot de passe saisis puis recommencez.'
-        }
+      // Handle errors
+      return {
+        message: 'Vos identifiants sont incorrects. Vérifiez le nom d\'utilisateur et le mot de passe saisis puis recommencez.'
+      }
     }
 }

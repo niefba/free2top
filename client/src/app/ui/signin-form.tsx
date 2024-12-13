@@ -4,7 +4,7 @@ import { useFormStatus } from 'react-dom'
 import { useActionState } from 'react'
 
 import { signin } from '@/app/actions/auth'
-import FieldInput from '@/app/ui/field-input'
+import Input from '@/app/ui/field-label'
 
 export function SigninForm() {
   const [state, action] = useActionState(signin, undefined)
@@ -13,9 +13,9 @@ export function SigninForm() {
     <form action={action}>
       
  
-      <FieldInput id="name" label="Utilisateur" error={state?.errors?.name}></FieldInput>
+      <Input id="name" label="Utilisateur" error={state?.errors?.name}></Input>
 
-      <FieldInput id="password" label="Mot de passe" type="password" error={state?.errors?.password}></FieldInput>
+      <Input id="password" label="Mot de passe" type="password" error={state?.errors?.password}></Input>
       { state?.message && <p className='pt-4 text-xs text-red-400 max-w-64'>{state?.message}</p>}
 
       <div className="flex justify-center mt-6">
