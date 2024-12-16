@@ -2,7 +2,7 @@
 
 import { SigninFormSchema, SigninFormState } from '@/app/lib/definitions'
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers'
+import { createSession } from '../lib/session';
 
 
 export async function signin(state: SigninFormState, formData: FormData) {
@@ -31,8 +31,9 @@ export async function signin(state: SigninFormState, formData: FormData) {
     
     const data = await response.json();
     if (response.ok && data.token) {
-      // Save the token in a cookie
-      (await cookies()).set('authToken', data.token)
+      console.log(data.user.role)
+      // Create session with token
+      createSession(data.token)
       redirect('/dashboard')
     } else {
       // Handle errors

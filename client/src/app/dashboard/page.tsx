@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { verifyToken } from "@/app/lib/dal";
 
 interface Course {
     id: string;
@@ -8,17 +9,21 @@ interface Course {
   }
 
 export default async function Dashboard() {
-    const courses = await fetch(`${process.env.API_URL}/api/courses`)
-    const {data} = await courses.json()
-    
-    return (
-      <>
-        {data.map((course: Course) => (
-          <CourseRow key={course.id} course={course}></CourseRow>
-        ))}
-        <AddButton></AddButton>
-      </>
-    )
+  const authToken = await verifyToken()
+  const courses = await fetch(`${process.env.API_URL}/api/courses`,  {
+    method: 'GET',
+    headers: { 'Authorization': `Basic ${authToken}` }
+  })
+  const {data} = await courses.json()
+  
+  return (
+    <>
+      {data.map((course: Course) => (
+        <CourseRow key={course.id} course={course}></CourseRow>
+      ))}
+      <AddButton></AddButton>
+    </>
+  )
 }
 
 function CourseRow({course}: {course: Course}) {

@@ -7,7 +7,7 @@ import { asynchandler } from "../middleware/asynchandler";
 const Router = express.Router();
 
 Router.get("/courses", 
-  //asynchandler(authentification), 
+  asynchandler(authentification), 
   asynchandler(CourseController.getAllCourses)
 );
 Router.post("/courses",

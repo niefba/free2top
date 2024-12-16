@@ -1,8 +1,8 @@
 'use server'
 
 import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers'
 
+import { verifyToken } from "@/app/lib/dal";
 import { CourseFormSchema, CourseFormState } from '@/app/lib/definitions'
 
 export async function create(state: CourseFormState, formData: FormData) {
@@ -26,15 +26,10 @@ export async function create(state: CourseFormState, formData: FormData) {
         }
     }
 
-    // Call the provider or db to create a user...
-    //const myHeaders = new Headers();
-    //myHeaders.append('Authorization', 'dummy');
-    const cookieStore = await cookies()
-    const authToken = cookieStore.get('authToken')
-
+    const authToken = await verifyToken()
     const response = await fetch(`${process.env.API_URL}/api/courses`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken?.value}` },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
       body: JSON.stringify({ target, itinerary, description }),
     })
     console.log(response);
