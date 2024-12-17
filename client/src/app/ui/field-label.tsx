@@ -2,6 +2,7 @@ import { useState } from "react";
 
 interface FieldProps {
     id: string;
+    init?: string;
     name?: string;
     type?: string;
     label: string;
@@ -9,8 +10,8 @@ interface FieldProps {
     error?: string[];
 }
 
-export default function Input({id, name=id, type="text", label, disabled=false, error} : FieldProps) {
-    const [value, setValue] = useState("")
+export default function Input({id, init="", name=id, type="text", label, disabled=false, error} : FieldProps) {
+    const [value, setValue] = useState(init)
     return (
       <div>
         <div className="flex flex-col space-y-1">
@@ -27,8 +28,8 @@ export default function Input({id, name=id, type="text", label, disabled=false, 
     )
 }
 
-export function Textarea({id, name=id, label, disabled=false, error} : FieldProps) {
-  const [value, setValue] = useState("")
+export function Textarea({id, init="", name=id, label, disabled=false, error} : FieldProps) {
+  const [value, setValue] = useState(init)
   return (
     <div>
       <div className="flex flex-col space-y-1">

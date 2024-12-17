@@ -35,6 +35,17 @@ export class CourseController {
       .json({ message: "Course created successfully", course });
   }
 
+  static async getCourse(req: Request, res: Response) {
+    const { id } = req.params;
+    const courseRepository = AppDataSource.getRepository(Course);
+    const course = await courseRepository.findOne({
+      where: { id },
+    });
+    return res.status(200).json({
+      data: course,
+    });
+  }
+
   static async updateCourse(req: Request, res: Response) {
     const { id } = req.params;
     const { target, itinerary, description, director, year, rating, image, cast } =
