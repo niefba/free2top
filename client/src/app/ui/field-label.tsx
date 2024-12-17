@@ -35,6 +35,8 @@ export function Textarea({id, init="", name=id, label, disabled=false, error} : 
       <div className="flex flex-col space-y-1">
         <label htmlFor={id} className="text-lg font-medium text-gray-700">{label}</label>
         <textarea id={id} name={name} placeholder={label} disabled={disabled} value={value} onChange={e => { setValue(e.target.value)}}
+          maxLength={5000}
+          rows={7}
           className="px-4 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent"
         >
         </textarea>

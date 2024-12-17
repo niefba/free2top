@@ -12,6 +12,6 @@ export const verifyToken = cache(async () => {
   if (!authToken) {
     redirect('/')
   }
-  console.log(authToken)
+
   return authToken
 })

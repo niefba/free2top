@@ -1,10 +1,10 @@
 'use client'
 
 import { useFormStatus } from 'react-dom'
-import { useActionState } from 'react'
+import { useActionState, useState } from 'react'
 
 import Input, { Textarea } from '@/app/ui/field-label'
-import { create, update } from '@/app/actions/course'
+import { createCourse, updateCourse, deleteCourse } from '@/app/actions/course'
 import Link from 'next/link'
 
 interface CourseProps {
@@ -16,8 +16,8 @@ interface CourseProps {
 
 export function CourseForm ({id, target, itinerary, description} : CourseProps) {
     // Update or create a course
-    const [state, action] = useActionState(id ? update.bind(null, id) : create, undefined)
-    
+    const [state, action] = useActionState(id ? updateCourse.bind(null, id) : createCourse, undefined)
+    const [confirmDelete, setConfirmDelete] = useState(false)
     return (
       <form action={action} className='m-2'>
         
@@ -29,8 +29,22 @@ export function CourseForm ({id, target, itinerary, description} : CourseProps) 
           
   
           <div className="flex justify-center mt-6">
-              <SubmitButton />
-              <CancelButton href="/dashboard">Annuler</CancelButton>
+            { !confirmDelete && id &&
+                <DeleteButton handleClick={() => setConfirmDelete(true)}></DeleteButton>
+            }
+            { !confirmDelete &&
+            <>
+                <SubmitButton />
+                <CancelButton href="/dashboard">Annuler</CancelButton>
+            </>
+            }
+            { confirmDelete && id &&
+            <>
+                <span className="grid place-items-center">Confirmez-vous la suppression?</span>
+                <ConfirmDeleteButton id={id}></ConfirmDeleteButton>
+                <CancelDeleteButton handleClick={() => setConfirmDelete(false)}></CancelDeleteButton>
+            </>
+            }
           </div>
           
           
@@ -49,7 +63,39 @@ function SubmitButton() {
     </button>
     )
 }
+ 
+function DeleteButton({handleClick} : {handleClick: () => void}) {
+    const { pending } = useFormStatus()
     
+    return (
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+        disabled={pending}
+        onClick={handleClick}>
+        Supprimer
+    </button>
+    )
+}
+
+function ConfirmDeleteButton({id} : {id: string}) {
+    
+    return (
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700'
+        onClick={() => deleteCourse(id)}>
+        Oui
+    </button>
+    )
+}
+
+function CancelDeleteButton({handleClick} : {handleClick: () => void}) {
+    
+    return (
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+        onClick={handleClick}>
+        Non
+    </button>
+    )
+}
+
 function CancelButton({href, children} : {href:string, children: string}) {
     
     return (
