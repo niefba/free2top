@@ -14,7 +14,7 @@ export function Header() {
             <Link href="/" className="flex flex-row items-center">
                 <Image
                         className="invert justify-center"
-                        src="free2top.svg"
+                        src="/free2top.svg"
                         alt="Free2Top logo"
                         width={45}
                         height={45}
