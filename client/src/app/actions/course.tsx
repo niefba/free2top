@@ -10,12 +10,14 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const target = formData.get('target');
     const itinerary = formData.get('itinerary');
     const description = formData.get('description');
+    const category = formData.get('category');
 
     // Validate form fields
     const validatedFields = CourseFormSchema.safeParse({
         target,
         itinerary,
-        description
+        description,
+        category
     })
     
     // If any form fields are invalid, return early
@@ -30,7 +32,7 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const response = await fetch(`${process.env.API_URL}/api/courses`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
-      body: JSON.stringify({ target, itinerary, description }),
+      body: JSON.stringify({ target, itinerary, description, category }),
     })
     
     if (response.ok) {
@@ -49,12 +51,14 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const target = formData.get('target');
   const itinerary = formData.get('itinerary');
   const description = formData.get('description');
+  const category = formData.get('category');
 
   // Validate form fields
   const validatedFields = CourseFormSchema.safeParse({
       target,
       itinerary,
-      description
+      description,
+      category
   })
   
   // If any form fields are invalid, return early
@@ -69,7 +73,7 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const response = await fetch(`${process.env.API_URL}/api/courses/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
-    body: JSON.stringify({ target, itinerary, description }),
+    body: JSON.stringify({ target, itinerary, description, category }),
   })
   console.log(response);
   if (response.ok) {

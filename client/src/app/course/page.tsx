@@ -6,7 +6,7 @@ export default function Course() {
 
 
     return (
-        <CourseForm target='' itinerary='' description=''></CourseForm>
+        <CourseForm target='' itinerary='' description='' category=''></CourseForm>
     )
 }
 
