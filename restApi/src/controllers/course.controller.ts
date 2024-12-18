@@ -14,7 +14,14 @@ export class CourseController {
     } else {
       console.log("serving from db");
       const courseRepository = AppDataSource.getRepository(Course);
-      const courses = await courseRepository.find();
+      const courses = await courseRepository.find({
+        select: {
+          id: true,
+          target: true,
+          itinerary: true,
+          description: true
+        }
+      });
       cache.put("data", courses, 10000);
       return res.status(200).json({
         data: courses,

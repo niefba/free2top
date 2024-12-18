@@ -33,7 +33,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
         <Textarea id="description" init={description} label="Description" error={state?.errors?.description}></Textarea>
         <Select id='category' init={category} label="Catégorie" options={categories} error={state?.errors?.category}></Select>
 
-        { state?.message && <p className='pt-4 text-xs text-red-400 max-w-64'>{state?.message}</p>}
+        { state?.message && <p className='px-2 pt-4 text-red-400'>{state?.message}</p>}
         
 
         <div className="flex justify-center mt-6">
