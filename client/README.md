@@ -19,4 +19,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Environment Variables to set in .env
 
     NEXT_TELEMETRY_DISABLED=1
-    NEXT_PUBLIC_API_URL=http://localhost:4000
+    API_URL=http://server_free2top:4000

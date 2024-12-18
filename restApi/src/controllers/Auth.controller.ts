@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import { AppDataSource } from "../data-source";
 import { User } from "../entity/User";
 import { encrypt } from "../helpers/encrypt";
-
+import { UserResponse } from "../dto/user.dto";
 
 export class AuthController {
   static async login(req: Request, res: Response) {
@@ -24,7 +24,14 @@ export class AuthController {
       }
       const token = encrypt.generateToken({ id: user.id });
 
-      return res.status(200).json({ message: "Login successful", user, token });
+      // Use the UserResponse DTO to structure the data being sent in the response
+      const userDataSent = new UserResponse()
+      userDataSent.id = user.id;
+      userDataSent.name = user.name;
+      userDataSent.email= user.email;
+      userDataSent.role = user.role;
+
+      return res.status(200).json({ message: "Login successful", user: userDataSent, token });
     } catch (error) {
       console.error(error);
       return res.status(500).json({ message: "Internal server error" });

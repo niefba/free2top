@@ -19,6 +19,9 @@ import {
   
     @Column({ nullable: false })
     description: string;
+
+    @Column({ nullable: false })
+    category: string;
   
     @CreateDateColumn()
     createdAt: Date;

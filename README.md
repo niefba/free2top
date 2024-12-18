@@ -12,6 +12,7 @@ Run the project with Hot reloading
 
 This command generates a migration file in the src/migration directory:
 
+    cd .\restApi\
     typeorm migration:create ./src/migration/users
 
 Edit the generated migration file to define the SQL query and run the migration:
