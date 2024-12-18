@@ -6,6 +6,8 @@ import {
     UpdateDateColumn,
   } from "typeorm";
   
+  export type CategoryType = "ski touring" | "trekking" | "splitboard"
+
   @Entity({ name: "courses" })
   export class Course {
     @PrimaryGeneratedColumn("uuid")
@@ -20,8 +22,13 @@ import {
     @Column({ nullable: false })
     description: string;
 
-    @Column({ nullable: false })
-    category: string;
+    @Column({ 
+      nullable: false,
+      type: "enum",
+      enum: ["ski touring", "trekking", "splitboard"],
+      default: "ski touring"
+    })
+    category: CategoryType;
   
     @CreateDateColumn()
     createdAt: Date;
