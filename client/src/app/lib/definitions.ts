@@ -41,6 +41,10 @@ export const CourseFormSchema = z.object({
     .string()
     .min(1, { message: 'Choisir une discipline' })
     .trim(),
+  dateBegin: z
+    .string()
+    .date('Date non valide')
+    .trim(),
 })
   
 export type CourseFormState =
@@ -50,6 +54,7 @@ export type CourseFormState =
         itinerary?: string[]
         description?: string[]
         category?: string[]
+        dateBegin?: string[]
       }
       message?: string
     }

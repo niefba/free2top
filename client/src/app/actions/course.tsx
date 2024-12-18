@@ -11,13 +11,15 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const itinerary = formData.get('itinerary');
     const description = formData.get('description');
     const category = formData.get('category');
+    const dateBegin = formData.get('dateBegin');
 
     // Validate form fields
     const validatedFields = CourseFormSchema.safeParse({
         target,
         itinerary,
         description,
-        category
+        category,
+        dateBegin
     })
     
     // If any form fields are invalid, return early
@@ -32,7 +34,7 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const response = await fetch(`${process.env.API_URL}/api/courses`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
-      body: JSON.stringify({ target, itinerary, description, category }),
+      body: JSON.stringify({ target, itinerary, description, category, dateBegin }),
     })
     
     if (response.ok) {
@@ -52,13 +54,15 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const itinerary = formData.get('itinerary');
   const description = formData.get('description');
   const category = formData.get('category');
+  const dateBegin = formData.get('dateBegin');
 
   // Validate form fields
   const validatedFields = CourseFormSchema.safeParse({
       target,
       itinerary,
       description,
-      category
+      category,
+      dateBegin
   })
   
   // If any form fields are invalid, return early
@@ -73,7 +77,7 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const response = await fetch(`${process.env.API_URL}/api/courses/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
-    body: JSON.stringify({ target, itinerary, description, category }),
+    body: JSON.stringify({ target, itinerary, description, category, dateBegin }),
   })
   console.log(response);
   if (response.ok) {

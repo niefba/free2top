@@ -29,7 +29,10 @@ import {
       default: "ski touring"
     })
     category: CategoryType;
-  
+
+    @Column({ nullable: false })
+    dateBegin: Date;
+
     @CreateDateColumn()
     createdAt: Date;
   

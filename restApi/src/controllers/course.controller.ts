@@ -22,13 +22,15 @@ export class CourseController {
     }
   }
   static async createCourse(req: Request, res: Response) {
-    const { target, itinerary, description, category, year, rating, image, cast } =
+    const { target, itinerary, description, category, dateBegin, rating, image, cast } =
       req.body;
     const course = new Course();
     course.target = target;
     course.itinerary = itinerary;
     course.description = description;
     course.category = category;
+    course.dateBegin = dateBegin;
+
     const courseRepository = AppDataSource.getRepository(Course);
     await courseRepository.save(course);
     return res
@@ -49,7 +51,7 @@ export class CourseController {
 
   static async updateCourse(req: Request, res: Response) {
     const { id } = req.params;
-    const { target, itinerary, description, category, year, rating, image, cast } =
+    const { target, itinerary, description, category, dateBegin, rating, image, cast } =
       req.body;
     const courseRepository = AppDataSource.getRepository(Course);
     const course = await courseRepository.findOne({
@@ -59,6 +61,8 @@ export class CourseController {
     course.itinerary = itinerary;
     course.description = description;
     course.category = category;
+    course.dateBegin = dateBegin;
+    
     await courseRepository.save(course);
     return res
       .status(200)
