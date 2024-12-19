@@ -1,14 +1,14 @@
 import { useState } from "react";
 
-interface FieldProps {
-    id: string;
-    init?: string;
-    name?: string;
-    type?: string;
-    label: string;
-    disabled?: boolean;
-    error?: string[];
-    options?: string[];
+export type FieldProps = {
+  id: string;
+  init?: string | number;
+  name?: string;
+  type?: string;
+  label: string;
+  disabled?: boolean;
+  error?: string[];
+  options?: string[];
 }
 
 export default function Input({id, init="", name=id, type="text", label, disabled=false, error} : FieldProps) {

@@ -33,6 +33,18 @@ import {
     @Column({ nullable: false })
     dateBegin: Date;
 
+    @Column({ nullable: false })
+    altitude: number;
+
+    @Column({ nullable: false })
+    ascending: number;
+
+    @Column({ nullable: false })
+    hours: number;
+
+    @Column({ nullable: false, default: false })
+    publicTransport: boolean;
+
     @CreateDateColumn()
     createdAt: Date;
   

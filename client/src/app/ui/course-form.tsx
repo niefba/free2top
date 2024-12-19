@@ -13,12 +13,16 @@ interface CourseProps {
     itinerary: string,
     description: string,
     category: CourseCategory,
-    dateBegin: string
+    dateBegin?: string,
+    altitude?: number,
+    ascending?: number,
+    hours?: number,
+    publicTransport?: boolean,
 }
 
 type CourseCategory = "" | "ski touring" | "trekking" | "splitboard";
 
-export function CourseForm ({id, target, itinerary, description, category, dateBegin} : CourseProps) {
+export function CourseForm ({id, target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport} : CourseProps) {
     // Update or create a course
     const [state, action] = useActionState(id ? updateCourse.bind(null, id) : createCourse, undefined)
     const [confirmDelete, setConfirmDelete] = useState(false)
@@ -30,6 +34,10 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
         <Input id="target" init={target} label="Objectif" error={state?.errors?.target}></Input>
         <Input id="itinerary" init={itinerary} label="Itinéraire" error={state?.errors?.itinerary}></Input>
         <Input id="dateBegin" type="date" init={dateBegin?.substring(0, 10)} label="Date de la course" error={state?.errors?.dateBegin}></Input>
+        <Input id="altitude" type="number" init={altitude} label="Altitude en mètres" error={state?.errors?.altitude}></Input>
+        <Input id="ascending" type="number" init={ascending} label="Dénivelé en mètres" error={state?.errors?.ascending}></Input>
+        <Input id="hours" type="number" init={hours} label="Temps en heures" error={state?.errors?.hours}></Input>
+        {publicTransport}
         <Textarea id="description" init={description} label="Description" error={state?.errors?.description}></Textarea>
         <Select id='category' init={category} label="Catégorie" options={categories} error={state?.errors?.category}></Select>
 

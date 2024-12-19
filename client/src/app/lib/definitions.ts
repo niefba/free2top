@@ -45,6 +45,18 @@ export const CourseFormSchema = z.object({
     .string()
     .date('Date non valide')
     .trim(),
+  altitude: z
+    .number()
+    .int('Un nombre entier est attendu')
+    .positive('Alitude non valide'),
+  ascending: z
+    .number()
+    .int('Un nombre entier est attendu')
+    .positive('Dénivelé non valide'),
+  hours: z
+    .number()
+    .int('Un nombre entier est attendu')
+    .positive('Temps non valide')
 })
   
 export type CourseFormState =
@@ -55,6 +67,9 @@ export type CourseFormState =
         description?: string[]
         category?: string[]
         dateBegin?: string[]
+        altitude?: string[]
+        ascending?: string[]
+        hours?: string[]
       }
       message?: string
     }
