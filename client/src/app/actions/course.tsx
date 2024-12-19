@@ -11,13 +11,25 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const itinerary = formData.get('itinerary');
     const description = formData.get('description');
     const category = formData.get('category');
+    const dateBegin = formData.get('dateBegin');
+    const altitude = Number(formData.get('altitude'));
+    const ascending = Number(formData.get('ascending'));
+    const hours = Number(formData.get('hours'));
+    const publicTransport = Boolean(formData.get('publicTransport'));
+    const dateStamm = formData.get('dateStamm');
+    const inactive = Boolean(formData.get('inactive'));
 
     // Validate form fields
     const validatedFields = CourseFormSchema.safeParse({
         target,
         itinerary,
         description,
-        category
+        category,
+        dateBegin,
+        altitude,
+        ascending,
+        hours,
+        dateStamm
     })
     
     // If any form fields are invalid, return early
@@ -32,7 +44,13 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const response = await fetch(`${process.env.API_URL}/api/courses`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
-      body: JSON.stringify({ target, itinerary, description, category }),
+      body: JSON.stringify({ target, itinerary, description, category, dateBegin, altitude,
+        ascending,
+        hours,
+        publicTransport,
+        dateStamm,
+        inactive
+      }),
     })
     
     if (response.ok) {
@@ -52,13 +70,25 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const itinerary = formData.get('itinerary');
   const description = formData.get('description');
   const category = formData.get('category');
+  const dateBegin = formData.get('dateBegin');
+  const altitude = Number(formData.get('altitude'));
+  const ascending = Number(formData.get('ascending'));
+  const hours = Number(formData.get('hours'));
+  const publicTransport = Boolean(formData.get('publicTransport'));
+  const dateStamm = formData.get('dateStamm');
+  const inactive = Boolean(formData.get('inactive'));
 
   // Validate form fields
   const validatedFields = CourseFormSchema.safeParse({
       target,
       itinerary,
       description,
-      category
+      category,
+      dateBegin,
+      altitude,
+      ascending,
+      hours,
+      dateStamm
   })
   
   // If any form fields are invalid, return early
@@ -73,7 +103,13 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const response = await fetch(`${process.env.API_URL}/api/courses/${id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${authToken}` },
-    body: JSON.stringify({ target, itinerary, description, category }),
+    body: JSON.stringify({ target, itinerary, description, category, dateBegin, altitude,
+      ascending,
+      hours,
+      publicTransport,
+      dateStamm,
+      inactive
+    }),
   })
   console.log(response);
   if (response.ok) {

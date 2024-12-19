@@ -14,7 +14,14 @@ export class CourseController {
     } else {
       console.log("serving from db");
       const courseRepository = AppDataSource.getRepository(Course);
-      const courses = await courseRepository.find();
+      const courses = await courseRepository.find({
+        select: {
+          id: true,
+          target: true,
+          itinerary: true,
+          description: true
+        }
+      });
       cache.put("data", courses, 10000);
       return res.status(200).json({
         data: courses,
@@ -22,13 +29,21 @@ export class CourseController {
     }
   }
   static async createCourse(req: Request, res: Response) {
-    const { target, itinerary, description, category, year, rating, image, cast } =
+    const { target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport, dateStamm, inactive } =
       req.body;
     const course = new Course();
     course.target = target;
     course.itinerary = itinerary;
     course.description = description;
     course.category = category;
+    course.dateBegin = dateBegin;
+    course.altitude = altitude;
+    course.ascending = ascending;
+    course.hours = hours;
+    course.publicTransport = publicTransport;
+    course.dateStamm = dateStamm;
+    course.inactive = inactive;
+
     const courseRepository = AppDataSource.getRepository(Course);
     await courseRepository.save(course);
     return res
@@ -49,7 +64,7 @@ export class CourseController {
 
   static async updateCourse(req: Request, res: Response) {
     const { id } = req.params;
-    const { target, itinerary, description, category, year, rating, image, cast } =
+    const { target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport, dateStamm, inactive } =
       req.body;
     const courseRepository = AppDataSource.getRepository(Course);
     const course = await courseRepository.findOne({
@@ -59,6 +74,14 @@ export class CourseController {
     course.itinerary = itinerary;
     course.description = description;
     course.category = category;
+    course.dateBegin = dateBegin;
+    course.altitude = altitude;
+    course.ascending = ascending;
+    course.hours = hours;
+    course.publicTransport = publicTransport;
+    course.dateStamm = dateStamm;
+    course.inactive = inactive;
+    
     await courseRepository.save(course);
     return res
       .status(200)
