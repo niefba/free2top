@@ -45,6 +45,12 @@ import {
     @Column({ nullable: false, default: false })
     publicTransport: boolean;
 
+    @Column({ nullable: false })
+    dateStamm: Date;
+
+    @Column({ nullable: false, default: false })
+    inactive: boolean;
+
     @CreateDateColumn()
     createdAt: Date;
   

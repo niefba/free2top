@@ -18,11 +18,13 @@ interface CourseProps {
     ascending?: number,
     hours?: number,
     publicTransport?: boolean,
+    dateStamm?: string,
+    inactive?: boolean
 }
 
 type CourseCategory = "" | "ski touring" | "trekking" | "splitboard";
 
-export function CourseForm ({id, target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport} : CourseProps) {
+export function CourseForm ({id, target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport, dateStamm, inactive} : CourseProps) {
     // Update or create a course
     const [state, action] = useActionState(id ? updateCourse.bind(null, id) : createCourse, undefined)
     const [confirmDelete, setConfirmDelete] = useState(false)
@@ -34,8 +36,9 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             
             <Input id="target" init={target} label="Objectif" error={state?.errors?.target}></Input>
             <Input id="itinerary" init={itinerary} label="Itinéraire" error={state?.errors?.itinerary}></Input>
-            <Checkbox id="publicTransport" checked={publicTransport} label="Transport public"></Checkbox>
+            <Checkbox id="publicTransport" checked={publicTransport} label="Transports publics"></Checkbox>
             <Input id="dateBegin" type="date" init={dateBegin?.substring(0, 10)} label="Date de la course" error={state?.errors?.dateBegin}></Input>
+            <Input id="dateStamm" type="date" init={dateStamm?.substring(0, 10)} label="Date du Stamm" error={state?.errors?.dateStamm}></Input>
             <div className="grid sm:grid-cols-3 sm:gap-4">
                 <Input id="altitude" type="number" init={altitude} label="Altitude en mètres" error={state?.errors?.altitude}></Input>
                 <Input id="ascending" type="number" init={ascending} label="Dénivelé en mètres" error={state?.errors?.ascending}></Input>
@@ -43,6 +46,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             </div>
             <Textarea id="description" init={description} label="Description" error={state?.errors?.description}></Textarea>
             <Select id='category' init={category} label="Catégorie" options={categories} error={state?.errors?.category}></Select>
+            <Checkbox id="inactive" checked={inactive} label="Désactiver les demandes de participation"></Checkbox>
 
             { state?.message && <p className='px-2 pt-4 text-red-400'>{state?.message}</p>}
             

@@ -16,6 +16,8 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const ascending = Number(formData.get('ascending'));
     const hours = Number(formData.get('hours'));
     const publicTransport = Boolean(formData.get('publicTransport'));
+    const dateStamm = formData.get('dateStamm');
+    const inactive = Boolean(formData.get('inactive'));
 
     // Validate form fields
     const validatedFields = CourseFormSchema.safeParse({
@@ -26,7 +28,8 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
         dateBegin,
         altitude,
         ascending,
-        hours
+        hours,
+        dateStamm
     })
     
     // If any form fields are invalid, return early
@@ -44,7 +47,10 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
       body: JSON.stringify({ target, itinerary, description, category, dateBegin, altitude,
         ascending,
         hours,
-        publicTransport }),
+        publicTransport,
+        dateStamm,
+        inactive
+      }),
     })
     
     if (response.ok) {
@@ -69,6 +75,8 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const ascending = Number(formData.get('ascending'));
   const hours = Number(formData.get('hours'));
   const publicTransport = Boolean(formData.get('publicTransport'));
+  const dateStamm = formData.get('dateStamm');
+  const inactive = Boolean(formData.get('inactive'));
 
   // Validate form fields
   const validatedFields = CourseFormSchema.safeParse({
@@ -79,7 +87,8 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
       dateBegin,
       altitude,
       ascending,
-      hours
+      hours,
+      dateStamm
   })
   
   // If any form fields are invalid, return early
@@ -97,7 +106,10 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
     body: JSON.stringify({ target, itinerary, description, category, dateBegin, altitude,
       ascending,
       hours,
-      publicTransport }),
+      publicTransport,
+      dateStamm,
+      inactive
+    }),
   })
   console.log(response);
   if (response.ok) {
