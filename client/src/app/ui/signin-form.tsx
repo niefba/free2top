@@ -4,7 +4,7 @@ import { useFormStatus } from 'react-dom'
 import { useActionState } from 'react'
 
 import { signin } from '@/app/actions/auth'
-import Input from '@/app/ui/field-label'
+import { Input } from '@/app/ui/field-label'
 
 export function SigninForm() {
   const [state, action] = useActionState(signin, undefined)
