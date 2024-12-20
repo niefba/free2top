@@ -24,19 +24,35 @@ export type SigninFormState =
 
 // Signup
 export const SignupFormSchema = z.object({
+  firstName: z
+    .string()
+    .min(2, { message: 'Votre prénom' })
+    .trim(),
+  lastName: z
+    .string()
+    .min(2, { message: 'Votre nom de famille' })
+    .trim(),
   email: z
     .string()
     .email({ message: 'Votre adresse mail' })
     .trim(),
   password: z
     .string()
-    .min(6, { message: 'Votre mot de passe' })
+    .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, 'Votre mot de passe doit contenir au moins une lettre, un chiffre, un caractère spécial, et avoir une longueur minimale de 8 caractères.')
     .trim(),
-})
+  confirm: z
+    .string()
+    .trim(),
+}).refine((data) => data.password === data.confirm, {
+  message: "Les mots de passe ne correpondent pas",
+  path: ["confirm"], // path of error
+});
  
 export type SignupFormState =
   | {
       errors?: {
+        firstName?: string[]
+        lastName?: string[]
         email?: string[]
         password?: string[]
       }

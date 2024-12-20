@@ -1,9 +1,14 @@
+'use client'
 import Image from "next/image";
 import Link from "next/link";
+import { signout } from "@/app/actions/auth";
+import { usePathname } from "next/navigation";
 
 
-export function Header() {    
+export function Header() {
+    const pathname = usePathname() 
     return (
+        pathname !== '/' && pathname !== '/signup' &&
         <div className="flex flex-row items-center bg-black p-2">
             <Link href="/" className="flex flex-row items-center">
                 <Image
@@ -16,6 +21,7 @@ export function Header() {
                         />
                 <span className="text-white">Free2Top</span>
             </Link>
+            <button onClick={() => signout()} className="absolute right-2 text-white">Sign out</button>
         </div>
     )
 }

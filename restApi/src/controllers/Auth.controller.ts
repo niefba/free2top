@@ -27,7 +27,7 @@ export class AuthController {
       // Use the UserResponse DTO to structure the data being sent in the response
       const userDataSent = new UserResponse()
       userDataSent.id = user.id;
-      userDataSent.name = user.name;
+      userDataSent.name = `${user.firstName} ${user.lastName}`;
       userDataSent.email= user.email;
       userDataSent.role = user.role;
 

@@ -12,10 +12,14 @@ export function SignupForm() {
   return (
     <form action={action}>
       
- 
+      <Input id="firstName" label="Prénom" error={state?.errors?.firstName}></Input>
+      <Input id="lastName" label="Nom" error={state?.errors?.lastName}></Input>
+
       <Input id="email" label="Identifiant" placeholder="Adresse mail" error={state?.errors?.email}></Input>
 
       <Input id="password" label="Mot de passe" type="password" error={state?.errors?.password}></Input>
+      <Input id="confirm" label="Confimation" type="password" error={state?.errors?.confirm}></Input>
+
       { state?.message && <p className='pt-4 text-xs text-red-400 max-w-64'>{state?.message}</p>}
 
       <div className="flex justify-center mt-6">
@@ -34,7 +38,7 @@ function SubmitButton() {
     <button className='appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
       disabled={pending}
       type="submit">
-      Sign In
+      Sign Up
     </button>
   )
 }

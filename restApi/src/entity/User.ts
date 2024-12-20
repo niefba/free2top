@@ -12,7 +12,10 @@ import {
     id: string;
   
     @Column({ nullable: false })
-    name: string;
+    firstName: string;
+
+    @Column({ nullable: false })
+    lastName: string;
   
     @Column({ nullable: false })
     email: string;
