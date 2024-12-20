@@ -1,5 +1,6 @@
 import Image from "next/image";
 import {SigninForm} from './ui/signin-form'
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -16,6 +17,11 @@ export default function Home() {
         />
         
         <SigninForm></SigninForm>
+
+        <Link href={"/signup"}
+          className='appearance-none px-4 py-2 rounded-full hover:bg-stone-100 font-bold text-sky-500'>
+            Devenir membre
+        </Link>
       
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">

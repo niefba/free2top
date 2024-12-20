@@ -19,7 +19,7 @@ Router.get(
   asynchandler(AuthController.getProfile)
 );
 Router.post("/signup", asynchandler(UserController.signup));
-Router.post("/login", asynchandler(AuthController.login));
+Router.post("/signin", asynchandler(AuthController.signin));
 Router.put(
   "/update/:id",
   asynchandler(authentification),
