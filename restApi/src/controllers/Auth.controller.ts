@@ -5,18 +5,18 @@ import { encrypt } from "../helpers/encrypt";
 import { UserResponse } from "../dto/user.dto";
 
 export class AuthController {
-  static async login(req: Request, res: Response) {
+  static async signin(req: Request, res: Response) {
     try {
-      const { name, password } = req.body;
+      const { email, password } = req.body;
 
-      if (!name || !password) {
+      if (!email || !password) {
         return res
           .status(500)
-          .json({ message: " name and password required" });
+          .json({ message: " email and password required" });
       }
 
       const userRepository = AppDataSource.getRepository(User);
-      const user = await userRepository.findOne({ where: { name } });
+      const user = await userRepository.findOne({ where: { email } });
 
       const isPasswordValid = encrypt.comparepassword(user.password, password);
       if (!user || !isPasswordValid) {

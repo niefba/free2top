@@ -2,9 +2,9 @@ import { z } from 'zod'
 
 // Signin
 export const SigninFormSchema = z.object({
-  name: z
+  email: z
     .string()
-    .min(2, { message: 'Votre nom d\'utilisateur' })
+    .email({ message: 'Votre adresse mail' })
     .trim(),
   password: z
     .string()
@@ -15,12 +15,35 @@ export const SigninFormSchema = z.object({
 export type SigninFormState =
   | {
       errors?: {
-        name?: string[]
+        email?: string[]
         password?: string[]
       }
       message?: string
     }
   | undefined
+
+// Signup
+export const SignupFormSchema = z.object({
+  email: z
+    .string()
+    .email({ message: 'Votre adresse mail' })
+    .trim(),
+  password: z
+    .string()
+    .min(6, { message: 'Votre mot de passe' })
+    .trim(),
+})
+ 
+export type SignupFormState =
+  | {
+      errors?: {
+        email?: string[]
+        password?: string[]
+      }
+      message?: string
+    }
+  | undefined
+
 
 // Course
 export const CourseFormSchema = z.object({

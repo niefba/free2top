@@ -1,15 +1,9 @@
-'use client'
-
 import Image from "next/image";
-import { usePathname } from 'next/navigation'
 import Link from "next/link";
 
 
-export function Header() {
-    const pathname = usePathname()
-    
+export function Header() {    
     return (
-        pathname !== '/' &&
         <div className="flex flex-row items-center bg-black p-2">
             <Link href="/" className="flex flex-row items-center">
                 <Image
