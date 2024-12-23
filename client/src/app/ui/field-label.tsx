@@ -8,7 +8,7 @@ export type FieldProps = {
   placeholder?: string;
   disabled?: boolean;
   error?: string[];
-  options?: string[];
+  options?: {value: string, label: string}[];
   checked?: boolean;
 }
 
@@ -89,7 +89,7 @@ export function Select({id, init="", label, disabled=false, error, options} : Fi
           className="px-2 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent dark:bg-stone-700 dark:border-zinc-600"
         >
         { options?.map( (option, index) => 
-          <option key={index} value={option}>{option}</option>
+          <option key={index} value={option.value}>{option.label}</option>
         )}
         </select>
       </div>

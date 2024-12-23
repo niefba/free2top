@@ -28,7 +28,12 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
     // Update or create a course
     const [state, action] = useActionState(id ? updateCourse.bind(null, id) : createCourse, undefined)
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const categories = ["", "ski touring", "trekking", "splitboard"];
+    const categories : {value: string, label: string}[] = [
+        { value: "", label: "" },
+        { value: "ski touring", label: "Ski de randonnée" },
+        { value: "trekking", label: "Randonnée pédestre" },
+        { value: "splitboard", label: "Splitboard" }
+    ];
 
     return (
     <div className='lg:flex lg:justify-center'>
