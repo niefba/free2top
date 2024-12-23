@@ -80,7 +80,7 @@ function SubmitButton() {
     const { pending } = useFormStatus()
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:hover:bg-stone-700 dark:border-zinc-600'
         disabled={pending}
         type="submit">
         Enregistrer
@@ -92,7 +92,7 @@ function DeleteButton({handleClick} : {handleClick: () => void}) {
     const { pending } = useFormStatus()
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
         disabled={pending}
         onClick={handleClick}>
         Supprimer
@@ -103,7 +103,7 @@ function DeleteButton({handleClick} : {handleClick: () => void}) {
 function ConfirmDeleteButton({id} : {id: string}) {
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:bg-stone-200 dark:text-zinc-600 dark:hover:bg-stone-300 dark:border-zinc-600'
         onClick={() => deleteCourse(id)}>
         Oui
     </button>
@@ -113,7 +113,7 @@ function ConfirmDeleteButton({id} : {id: string}) {
 function CancelDeleteButton({handleClick} : {handleClick: () => void}) {
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
         onClick={handleClick}>
         Non
     </button>
@@ -123,7 +123,7 @@ function CancelDeleteButton({handleClick} : {handleClick: () => void}) {
 function CancelButton({href, children} : {href:string, children: string}) {
     
     return (
-    <Link className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+    <Link className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
         href={href}>
         {children}
     </Link>
