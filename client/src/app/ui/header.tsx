@@ -2,13 +2,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import { signout } from "@/app/actions/auth";
-import { usePathname } from "next/navigation";
-
 
 export function Header() {
-    const pathname = usePathname() 
     return (
-        pathname !== '/' && pathname !== '/signup' &&
         <div className="flex flex-row items-center bg-black p-2">
             <Link href="/" className="flex flex-row items-center">
                 <Image
