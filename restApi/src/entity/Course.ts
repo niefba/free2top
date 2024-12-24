@@ -4,8 +4,11 @@ import {
     Entity,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
+    ManyToOne
   } from "typeorm";
   
+  import { User } from "./User"
+
   export type CategoryType = "ski touring" | "trekking" | "splitboard"
 
   @Entity({ name: "courses" })
@@ -56,5 +59,8 @@ import {
   
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @ManyToOne(() => User, (user) => user.courses)
+    user: User;
   }
   
