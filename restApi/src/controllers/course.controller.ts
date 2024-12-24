@@ -45,12 +45,12 @@ export class CourseController {
     course.dateStamm = dateStamm;
     course.inactive = inactive;
 
-    if (!req[" currentUser"]) {
+    if (!req["currentUser"]) {
       return res.status(401).json({ message: "Unauthorized" });
     }
     const userRepository = AppDataSource.getRepository(User);
     course.user = await userRepository.findOne({
-      where: { id: req[" currentUser"].id },
+      where: { id: req["currentUser"].id },
     });
 
     const courseRepository = AppDataSource.getRepository(Course);
@@ -71,9 +71,16 @@ export class CourseController {
     });
     // Do not include user password
     delete course.user.password;
-    console.log(course)
+
+    // Check ownership
+    let readonly = true;
+    if (req["currentUser"].id === course.user.id || req["currentUser"].role === 'admin') {
+      readonly = false
+    }
+
     return res.status(200).json({
       data: course,
+      readonly
     });
   }
 
