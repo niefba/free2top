@@ -20,7 +20,8 @@ export class CourseController {
           id: true,
           target: true,
           itinerary: true,
-          description: true
+          description: true,
+          dateBegin: true
         },
         order: {
           dateBegin: "ASC",

@@ -33,7 +33,7 @@ export function Input({id, init="", type="text", label, placeholder=label, disab
           />
         </div>
         {helper &&
-          <p className='px-2 text-xs text-gray-400'>{helper}</p>
+          <p className='px-2 text-sm text-gray-400'>{helper}</p>
         }
         {error?.map((value, index) => 
           <p key={index} className='px-2 text-xs text-red-400'>{value}</p>

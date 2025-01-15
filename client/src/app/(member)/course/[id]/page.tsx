@@ -31,7 +31,7 @@ export default async function Course({params} : { params: Promise<{ id: string }
           <div className='m-2 grow max-w-3xl'>
             <h1 className='text-2xl mb-4'>
               {data.target} - {data.itinerary}
-              <small className="pl-4 md:float-right">{ data.category }</small>
+              <span className="pl-4 md:float-right text-stone-400">{ data.category }</span>
             </h1>
             
             <div className='flex flex-wrap'>
@@ -49,7 +49,7 @@ export default async function Course({params} : { params: Promise<{ id: string }
                 <strong className='text-right'>Accessible en transports publics</strong>
                 <span>{ data.publicTransport ? "Oui" : "Non" }</span>
               </div>
-              <div className='flex-auto min-w-96 bg-stone-700 rounded p-2'>
+              <div className='flex-auto min-w-96 bg-stone-100 dark:bg-stone-700 rounded p-2'>
               {
                 data.description.split("\n").map((line: string, key: number) => {
                   return <div key={key}>{line}</div>;

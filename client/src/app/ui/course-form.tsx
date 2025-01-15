@@ -51,7 +51,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             </div>
             <Textarea id="description" init={description} label="Description" error={state?.errors?.description}></Textarea>
             <Select id='category' init={category} label="Catégorie" options={categories} error={state?.errors?.category}></Select>
-            <Checkbox id="inactive" checked={inactive} label="Désactiver les demandes de participation"></Checkbox>
+            <Checkbox id="inactive" checked={inactive} label="Désactiver les demandes d'inscription"></Checkbox>
 
             { state?.message && <p className='px-2 pt-4 text-red-400'>{state?.message}</p>}
             

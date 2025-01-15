@@ -111,7 +111,6 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
       inactive
     }),
   })
-  console.log(response);
   if (response.ok) {
     redirect('/dashboard')
   } else {
