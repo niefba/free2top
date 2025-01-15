@@ -31,8 +31,14 @@ function CourseRow({course}: {course: Course}) {
         <Link href={`/course/${course.id}`} className="flex flex-row bg-stone-100 m-2 p-1
             rounded-md border-solid border border-zinc-300
             divide-x text-zinc-600 dark:bg-stone-700 dark:border-zinc-500 dark:text-zinc-300">
-            <div className="basis-1/3 px-1 line-clamp-1 hover:line-clamp-none font-bold">{course.target} - {course.itinerary}</div>
-            <div className="basis-2/3 px-1 pl-2">{course.description}</div>
+            <div className="basis-1/3 px-1 font-bold">{course.target} - {course.itinerary}</div>
+            <div className="basis-2/3 px-1 pl-2 line-clamp-3">
+              {
+                course.description?.split("\n").map((line,key) => {
+                  return <div key={key}>{line}</div>;
+                })
+              }
+            </div>
         </Link>
     )
 }

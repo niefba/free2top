@@ -8,8 +8,8 @@ const Router = express.Router();
 
 Router.get(
   "/users",
-  //asynchandler(authentification),
-  //asynchandler(authorization(["admin"])),
+  asynchandler(authentification),
+  asynchandler(authorization(["admin"])),
   asynchandler(UserController.getUsers)
 );
 Router.get(

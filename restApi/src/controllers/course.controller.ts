@@ -21,7 +21,10 @@ export class CourseController {
           target: true,
           itinerary: true,
           description: true
-        }
+        },
+        order: {
+          dateBegin: "ASC",
+        },
       });
       cache.put("data", courses, 10000);
       return res.status(200).json({
@@ -62,6 +65,14 @@ export class CourseController {
 
   static async getCourse(req: Request, res: Response) {
     const { id } = req.params;
+    if (!req["currentUser"]) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({
+      where: { id: req["currentUser"].id },
+    });
+
     const courseRepository = AppDataSource.getRepository(Course);
     const course = await courseRepository.findOne({
       where: { id },
@@ -74,7 +85,7 @@ export class CourseController {
 
     // Check ownership
     let readonly = true;
-    if (req["currentUser"].id === course.user.id || req["currentUser"].role === 'admin') {
+    if (req["currentUser"].id === course.user.id || user.role === 'admin') {
       readonly = false
     }
 

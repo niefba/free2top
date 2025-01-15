@@ -5,7 +5,7 @@ import { useActionState, useState } from 'react'
 
 import { Input, Select, Textarea, Checkbox } from '@/app/ui/field-label'
 import { createCourse, updateCourse, deleteCourse } from '@/app/actions/course'
-import Link from 'next/link'
+import { LinkButton } from '@/app/ui/link-button'
 
 interface CourseProps {
     id?: string,
@@ -63,7 +63,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             { !confirmDelete &&
             <>
                 <SubmitButton />
-                <CancelButton href="/dashboard">Annuler</CancelButton>
+                <LinkButton href="/dashboard">Annuler</LinkButton>
             </>
             }
             { confirmDelete && id &&
@@ -122,15 +122,5 @@ function CancelDeleteButton({handleClick} : {handleClick: () => void}) {
         onClick={handleClick}>
         Non
     </button>
-    )
-}
-
-function CancelButton({href, children} : {href:string, children: string}) {
-    
-    return (
-    <Link className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
-        href={href}>
-        {children}
-    </Link>
     )
 }
