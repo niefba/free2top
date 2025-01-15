@@ -11,12 +11,12 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     const itinerary = formData.get('itinerary');
     const description = formData.get('description');
     const category = formData.get('category');
-    const dateBegin = formData.get('dateBegin');
+    const dateBegin = String(formData.get('dateBegin'));
     const altitude = Number(formData.get('altitude'));
     const ascending = Number(formData.get('ascending'));
     const hours = Number(formData.get('hours'));
     const publicTransport = Boolean(formData.get('publicTransport'));
-    const dateStamm = formData.get('dateStamm');
+    const dateStamm = String(formData.get('dateStamm'));
     const inactive = Boolean(formData.get('inactive'));
 
     // Validate form fields
@@ -38,6 +38,13 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
             errors: validatedFields.error.flatten().fieldErrors,
             message: "Merci de vérifier les informations saisies"
         }
+    }
+
+    // Check coherence of dates
+    if (invalidDates(dateBegin, dateStamm)) {
+      return {
+        message: 'Les dates ne sont pas cohérentes.'
+      }
     }
 
     const authToken = await verifyToken()
@@ -70,12 +77,12 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   const itinerary = formData.get('itinerary');
   const description = formData.get('description');
   const category = formData.get('category');
-  const dateBegin = formData.get('dateBegin');
+  const dateBegin = String(formData.get('dateBegin'));
   const altitude = Number(formData.get('altitude'));
   const ascending = Number(formData.get('ascending'));
   const hours = Number(formData.get('hours'));
   const publicTransport = Boolean(formData.get('publicTransport'));
-  const dateStamm = formData.get('dateStamm');
+  const dateStamm = String(formData.get('dateStamm'));
   const inactive = Boolean(formData.get('inactive'));
 
   // Validate form fields
@@ -90,13 +97,20 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
       hours,
       dateStamm
   })
-  
+
   // If any form fields are invalid, return early
   if (!validatedFields.success) {
       return {
           errors: validatedFields.error.flatten().fieldErrors,
           message: "Merci de vérifier les informations saisies"
       }
+  }
+
+  // Check coherence of dates
+  if (invalidDates(dateBegin, dateStamm)) {
+    return {
+      message: 'Les dates ne sont pas cohérentes.'
+    }
   }
 
   const authToken = await verifyToken()
@@ -139,4 +153,8 @@ export async function deleteCourse(id: string) {
       }
   }
   
+}
+
+function invalidDates(dateBegin: string, dateStamm: string) {
+  return new Date(dateBegin).setHours(0,0,0,0) < new Date(dateStamm).setHours(0,0,0,0)
 }
