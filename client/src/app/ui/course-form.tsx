@@ -5,7 +5,7 @@ import { useActionState, useState } from 'react'
 
 import { Input, Select, Textarea, Checkbox } from '@/app/ui/field-label'
 import { createCourse, updateCourse, deleteCourse } from '@/app/actions/course'
-import Link from 'next/link'
+import { LinkButton } from '@/app/ui/link-button'
 
 interface CourseProps {
     id?: string,
@@ -28,7 +28,12 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
     // Update or create a course
     const [state, action] = useActionState(id ? updateCourse.bind(null, id) : createCourse, undefined)
     const [confirmDelete, setConfirmDelete] = useState(false)
-    const categories = ["", "ski touring", "trekking", "splitboard"];
+    const categories : {value: string, label: string}[] = [
+        { value: "", label: "" },
+        { value: "ski touring", label: "Ski de randonnée" },
+        { value: "trekking", label: "Randonnée pédestre" },
+        { value: "splitboard", label: "Splitboard" }
+    ];
 
     return (
     <div className='lg:flex lg:justify-center'>
@@ -46,7 +51,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             </div>
             <Textarea id="description" init={description} label="Description" error={state?.errors?.description}></Textarea>
             <Select id='category' init={category} label="Catégorie" options={categories} error={state?.errors?.category}></Select>
-            <Checkbox id="inactive" checked={inactive} label="Désactiver les demandes de participation"></Checkbox>
+            <Checkbox id="inactive" checked={inactive} label="Désactiver les demandes d'inscription"></Checkbox>
 
             { state?.message && <p className='px-2 pt-4 text-red-400'>{state?.message}</p>}
             
@@ -58,7 +63,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             { !confirmDelete &&
             <>
                 <SubmitButton />
-                <CancelButton href="/dashboard">Annuler</CancelButton>
+                <LinkButton href="/dashboard">Annuler</LinkButton>
             </>
             }
             { confirmDelete && id &&
@@ -80,7 +85,7 @@ function SubmitButton() {
     const { pending } = useFormStatus()
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:hover:bg-stone-700 dark:border-zinc-600'
         disabled={pending}
         type="submit">
         Enregistrer
@@ -92,7 +97,7 @@ function DeleteButton({handleClick} : {handleClick: () => void}) {
     const { pending } = useFormStatus()
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
         disabled={pending}
         onClick={handleClick}>
         Supprimer
@@ -103,7 +108,7 @@ function DeleteButton({handleClick} : {handleClick: () => void}) {
 function ConfirmDeleteButton({id} : {id: string}) {
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:bg-stone-200 dark:text-zinc-600 dark:hover:bg-stone-300 dark:border-zinc-600'
         onClick={() => deleteCourse(id)}>
         Oui
     </button>
@@ -113,19 +118,9 @@ function ConfirmDeleteButton({id} : {id: string}) {
 function CancelDeleteButton({handleClick} : {handleClick: () => void}) {
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
+    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
         onClick={handleClick}>
         Non
     </button>
-    )
-}
-
-function CancelButton({href, children} : {href:string, children: string}) {
-    
-    return (
-    <Link className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent'
-        href={href}>
-        {children}
-    </Link>
     )
 }

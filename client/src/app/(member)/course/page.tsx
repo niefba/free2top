@@ -1,6 +1,6 @@
 'use client'
 
-import { CourseForm } from '../ui/course-form'
+import { CourseForm } from '@/app/ui/course-form'
 
 export default function Course() {
 

@@ -4,8 +4,11 @@ import {
     Column,
     CreateDateColumn,
     UpdateDateColumn,
+    OneToMany
   } from "typeorm";
   
+  import { Course } from "./Course";
+
   @Entity({ name: "users" })
   export class User {
     @PrimaryGeneratedColumn("uuid")
@@ -31,5 +34,8 @@ import {
   
     @UpdateDateColumn()
     updatedAt: Date;
+
+    @OneToMany(() => Course, (course) => course.user)
+    courses: Course[]
   }
   

@@ -1,15 +1,18 @@
 import { MigrationInterface, QueryRunner } from "typeorm";
+import { encrypt } from "../helpers/encrypt";
 
 export class Users1733388852104 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        const encryptedPassword = await encrypt.encryptpass('secret');
         await queryRunner.query(
             ` 
                 --Table Definition
                 CREATE TABLE "users"  (
                   "id" uuid NOT NULL DEFAULT uuid_generate_v4(),
-                  "name" character varying NOT NULL,
-                  "email" character varying NOT NULL,
+                  "firstName" character varying NOT NULL DEFAULT '',
+                  "lastName" character varying NOT NULL DEFAULT '',
+                  "email" character varying NOT NULL UNIQUE,
                   "password" character varying NOT NULL,
                   "role"  character varying NOT NULL DEFAULT 'user',
                   "createdAt" TIMESTAMP NOT NULL DEFAULT now(),
@@ -18,8 +21,8 @@ export class Users1733388852104 implements MigrationInterface {
                 );
 
                 -- Admin user
-                INSERT INTO "users" ("name", "email", "password", "role")
-                VALUES ('admin', 'free2top@ik.me', 'secret', 'admin');
+                INSERT INTO "users" ("email", "password", "role")
+                VALUES ('free2top@ik.me', '${encryptedPassword}', 'admin');
                 `
           ),
             undefined;

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import * as cache from "memory-cache";
 import { AppDataSource } from "../data-source";
 import { Course } from "../entity/Course";
+import { User } from "../entity/User";
 
 export class CourseController {
   static async getAllCourses(req: Request, res: Response) {
@@ -19,8 +20,12 @@ export class CourseController {
           id: true,
           target: true,
           itinerary: true,
-          description: true
-        }
+          description: true,
+          dateBegin: true
+        },
+        order: {
+          dateBegin: "ASC",
+        },
       });
       cache.put("data", courses, 10000);
       return res.status(200).json({
@@ -44,6 +49,14 @@ export class CourseController {
     course.dateStamm = dateStamm;
     course.inactive = inactive;
 
+    if (!req["currentUser"]) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const userRepository = AppDataSource.getRepository(User);
+    course.user = await userRepository.findOne({
+      where: { id: req["currentUser"].id },
+    });
+
     const courseRepository = AppDataSource.getRepository(Course);
     await courseRepository.save(course);
     return res
@@ -53,12 +66,33 @@ export class CourseController {
 
   static async getCourse(req: Request, res: Response) {
     const { id } = req.params;
+    if (!req["currentUser"]) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    const userRepository = AppDataSource.getRepository(User);
+    const user = await userRepository.findOne({
+      where: { id: req["currentUser"].id },
+    });
+
     const courseRepository = AppDataSource.getRepository(Course);
     const course = await courseRepository.findOne({
       where: { id },
+      relations: {
+        user: true,
+      },
     });
+    // Do not include user password
+    delete course.user.password;
+
+    // Check ownership
+    let readonly = true;
+    if (req["currentUser"].id === course.user.id || user.role === 'admin') {
+      readonly = false
+    }
+
     return res.status(200).json({
       data: course,
+      readonly
     });
   }
 

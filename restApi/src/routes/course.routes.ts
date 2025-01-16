@@ -21,13 +21,13 @@ Router.post("/courses",
 Router.put(
   "/courses/:id",
   asynchandler(authentification),
-  asynchandler(authorization(["admin"])),
+  asynchandler(authorization(["admin", "user"])),
   asynchandler(CourseController.updateCourse)
 );
 Router.delete(
   "/courses/:id",
   asynchandler(authentification),
-  asynchandler(authorization(["admin"])),
+  asynchandler(authorization(["admin", "user"])),
   asynchandler(CourseController.deleteCourse)
 );
 export { Router as courseRouter };
