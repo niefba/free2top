@@ -2,6 +2,10 @@
 
 Training project made in Lab4Tech
 
+## Initialization
+
+    docker compose -f ./compose.migration.yaml up --build
+
 ## Run in Docker (dev mode)
 
 Run the project with Hot reloading
