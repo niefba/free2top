@@ -7,7 +7,6 @@
 # You can add other services your application may depend on here, such as a
 # database or a cache. For examples, see the Awesome Compose repository:
 # https://github.com/docker/awesome-compose
-
 include:
   - compose.db.yaml # with db declared
 
@@ -15,27 +14,16 @@ services:
   server:
     container_name: server_free2top
     build:
-      context: .
+      context: restApi
       dockerfile: Dockerfile
-      target: build
-    environment:
-      NODE_ENV: dev
+      target: final
+    #environment:
+    #  NODE_ENV: dev
     env_file:
-      - .env
+      - ./restApi/.env
     ports:
-      - ${PORT}:${PORT}
-    command: npm run dev
-    develop:
-      # The watch attribute automatically updates and previews your running Compose services as you edit and save your code
-      # Run docker compose up --watch to build and launch a Compose project and start the file watch mode
-      watch:
-        - action: sync
-          path: ./src
-          target: /usr/src/app/src
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: package.json
+      - 4000:4000
+    command: npm run start
 
     # PostgreSQL database used by application. `depends_on` tells Docker Compose to
     # start the database before your application. The `db-data` volume persists the
@@ -43,3 +31,15 @@ services:
     depends_on:
       db:
         condition: service_healthy
+
+  client:
+    container_name: client_free2top
+    build:
+      context: client
+      dockerfile: Dockerfile
+      target: final
+    command: npm run start
+    env_file:
+      - ./client/.env
+    ports:
+      - 3000:3000
