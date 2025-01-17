@@ -15,8 +15,3 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Environment Variables to set in .env
-
-    NEXT_TELEMETRY_DISABLED=1
-    API_URL=http://server_free2top:4000
