@@ -10,7 +10,7 @@ Training project made in Lab4Tech
 
 Run the project with Hot reloading
 
-    docker compose up --watch
+    docker compose up --build --watch
 
 ## Migrations
 
