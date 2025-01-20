@@ -85,7 +85,7 @@ export function Select({id, init="", label, disabled=false, error, options} : Fi
     <div>
       <div className="flex flex-col space-y-1">
         <label htmlFor={id} className="text-lg font-medium text-gray-700 dark:text-gray-200">{label}</label>
-        <select id={id} name={id} disabled={disabled} value={selectedValue} onChange={e => { setSelectedValue(e.target.value)}}
+        <select id={id} name={id} disabled={disabled} defaultValue={selectedValue} onChange={e => { setSelectedValue(e.target.value)}}
           className="px-2 py-2 border border-zinc-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-zinc-500 focus:border-transparent dark:bg-stone-700 dark:border-zinc-600"
         >
         { options?.map( (option, index) => 
