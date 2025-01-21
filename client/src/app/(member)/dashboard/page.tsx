@@ -59,7 +59,7 @@ function AddButton() {
  
   return (
     <div className="flex justify-center mt-6">
-      <Link className='px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
+      <Link className='btn'
       href="/course">
         Proposer une nouvelle course
       </Link>

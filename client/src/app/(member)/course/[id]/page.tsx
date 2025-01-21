@@ -1,6 +1,6 @@
 import { verifyToken } from '@/app/lib/dal'
 import { CourseForm } from '@/app/ui/course-form'
-import { LinkButton } from '@/app/ui/link-button'
+import Link from 'next/link'
 
 export default async function Course({params} : { params: Promise<{ id: string }> }) {
     
@@ -60,9 +60,9 @@ export default async function Course({params} : { params: Promise<{ id: string }
 
             <div className='flex flex-wrap justify-center m-4'>
               { isOpen &&
-                <LinkButton href={`mailto:${data.user.email}?subject=${data.target} - ${data.itinerary}`}>S&apos;inscrire</LinkButton>
+                <Link className='btn' href={`mailto:${data.user.email}?subject=${data.target} - ${data.itinerary}`}>S&apos;inscrire</Link>
               }
-              <LinkButton href="/dashboard">Annuler</LinkButton>
+              <Link className='btn' href="/dashboard">Annuler</Link>
             </div>
           </div>
         </div>

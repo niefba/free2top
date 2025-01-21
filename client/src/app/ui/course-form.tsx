@@ -5,7 +5,7 @@ import { useActionState, useState } from 'react'
 
 import { Input, Select, Textarea, Checkbox } from '@/app/ui/field-label'
 import { createCourse, updateCourse, deleteCourse } from '@/app/actions/course'
-import { LinkButton } from '@/app/ui/link-button'
+import Link from 'next/link'
 
 interface CourseProps {
     id?: string,
@@ -63,7 +63,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             { !confirmDelete &&
             <>
                 <SubmitButton />
-                <LinkButton href="/dashboard">Annuler</LinkButton>
+                <Link className='btn' href="/dashboard">Annuler</Link>
             </>
             }
             { confirmDelete && id &&
@@ -85,7 +85,7 @@ function SubmitButton() {
     const { pending } = useFormStatus()
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:hover:bg-stone-700 dark:border-zinc-600'
+    <button className='btn-primary'
         disabled={pending}
         type="submit">
         Enregistrer
@@ -97,7 +97,7 @@ function DeleteButton({handleClick} : {handleClick: () => void}) {
     const { pending } = useFormStatus()
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
+    <button className='btn'
         disabled={pending}
         onClick={handleClick}>
         Supprimer
@@ -108,7 +108,7 @@ function DeleteButton({handleClick} : {handleClick: () => void}) {
 function ConfirmDeleteButton({id} : {id: string}) {
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:bg-stone-200 dark:text-zinc-600 dark:hover:bg-stone-300 dark:border-zinc-600'
+    <button className='btn-primary'
         onClick={() => deleteCourse(id)}>
         Oui
     </button>
@@ -118,7 +118,7 @@ function ConfirmDeleteButton({id} : {id: string}) {
 function CancelDeleteButton({handleClick} : {handleClick: () => void}) {
     
     return (
-    <button className='mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600'
+    <button className='btn'
         onClick={handleClick}>
         Non
     </button>

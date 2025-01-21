@@ -18,3 +18,12 @@ body {
   color: var(--foreground);
   background: var(--background);
 }
+
+@layer components {
+  .btn {
+    @apply mx-2 appearance-none px-4 py-2 rounded-full border border-solid border-zinc-400 hover:bg-stone-100 hover:border-transparent dark:hover:bg-stone-700 dark:border-zinc-600
+  }
+  .btn-primary {
+    @apply mx-2 appearance-none px-4 py-2 rounded-full border border-solid bg-black text-white hover:bg-gray-700 dark:bg-stone-200 dark:text-zinc-800 dark:hover:bg-stone-300 dark:border-zinc-600
+  }
+}
