@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-// Signin
+// Signin Form Validation
 export const SigninFormSchema = z.object({
   email: z
     .string()
@@ -22,7 +22,7 @@ export type SigninFormState =
     }
   | undefined
 
-// Signup
+// Signup Form Validation
 export const SignupFormSchema = z.object({
   firstName: z
     .string()
@@ -61,7 +61,7 @@ export type SignupFormState =
   | undefined
 
 
-// Course
+// Course Form Validation
 export const CourseFormSchema = z.object({
   target: z
     .string()
@@ -118,3 +118,21 @@ export type CourseFormState =
       message?: string
     }
   | undefined
+
+// Course Props
+export interface CourseProps {
+  id?: string,
+  target: string,
+  itinerary: string,
+  description: string,
+  category: CourseCategory,
+  dateBegin: string,
+  altitude?: number,
+  ascending?: number,
+  hours?: number,
+  publicTransport?: boolean,
+  dateStamm?: string,
+  inactive?: boolean
+}
+
+type CourseCategory = "" | "ski touring" | "trekking" | "splitboard";

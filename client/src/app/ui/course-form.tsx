@@ -6,23 +6,7 @@ import { useActionState, useState } from 'react'
 import { Input, Select, Textarea, Checkbox } from '@/app/ui/field-label'
 import { createCourse, updateCourse, deleteCourse } from '@/app/actions/course'
 import Link from 'next/link'
-
-interface CourseProps {
-    id?: string,
-    target: string,
-    itinerary: string,
-    description: string,
-    category: CourseCategory,
-    dateBegin?: string,
-    altitude?: number,
-    ascending?: number,
-    hours?: number,
-    publicTransport?: boolean,
-    dateStamm?: string,
-    inactive?: boolean
-}
-
-type CourseCategory = "" | "ski touring" | "trekking" | "splitboard";
+import { CourseProps } from '@/app/lib/definitions'
 
 export function CourseForm ({id, target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport, dateStamm, inactive} : CourseProps) {
     // Update or create a course
@@ -36,8 +20,7 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
     ];
 
     return (
-    <div className='lg:flex lg:justify-center'>
-        <form action={action} className='m-2 grow max-w-3xl'>
+        <form action={action} className='grow max-w-3xl'>
             
             <Input id="target" init={target} label="Objectif" error={state?.errors?.target}></Input>
             <Input id="itinerary" init={itinerary} label="Itinéraire" error={state?.errors?.itinerary}></Input>
@@ -77,7 +60,6 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
             
             
         </form>
-    </div>
     )
 }
   

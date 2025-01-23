@@ -7,7 +7,7 @@ export class UserResponse {
     role: string;
 }
 
-export  interface payload {
+export  interface Payload {
     id:string
 }
     

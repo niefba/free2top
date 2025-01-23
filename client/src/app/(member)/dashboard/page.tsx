@@ -1,13 +1,6 @@
 import Link from "next/link";
 import { verifyToken } from "@/app/lib/dal";
-
-interface Course {
-    id: string;
-    target?: string;
-    itinerary?: string;
-    description?: string;
-    dateBegin: string;
-  }
+import { CourseProps } from '@/app/lib/definitions'
 
 export default async function Dashboard() {
   const authToken = await verifyToken()
@@ -18,16 +11,16 @@ export default async function Dashboard() {
   const {data} = await courses.json()
   
   return (
-    <>
-      {data.map((course: Course) => (
+    <div className='grow max-w-5xl'>
+      {data.map((course: CourseProps) => (
         <CourseRow key={course.id} course={course}></CourseRow>
       ))}
       <AddButton></AddButton>
-    </>
+    </div>
   )
 }
 
-function CourseRow({course}: {course: Course}) {
+function CourseRow({course}: {course: CourseProps}) {
     const options: Intl.DateTimeFormatOptions = {
       weekday: "short",
       year: 'numeric',

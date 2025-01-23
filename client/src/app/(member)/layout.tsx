@@ -8,7 +8,9 @@ export default function MemberLayout({
     return (
         <section>
             <Header></Header>
-            {children}
+            <div className='flex justify-center m-2'>
+                {children}
+            </div>
         </section>
     ) 
   }
