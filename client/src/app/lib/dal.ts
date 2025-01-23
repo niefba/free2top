@@ -15,3 +15,13 @@ export const verifyToken = cache(async () => {
 
   return authToken
 })
+
+export const getUserName = cache(async () => {
+  const authToken = await verifyToken()
+  const user = await fetch(`${process.env.API_URL}/auth/profile`,  {
+      method: 'GET',
+      headers: { 'Authorization': `Basic ${authToken}` }
+    })
+  const {firstName, lastName} = await user.json()
+  return `${firstName} ${lastName}`
+})

@@ -60,7 +60,7 @@ export default async function Course({params} : { params: Promise<{ id: string }
 
             <div className='flex flex-wrap justify-center m-4'>
               { isOpen &&
-                <Link className='btn' href={`mailto:${data.user.email}?subject=${data.target} - ${data.itinerary}`}>S&apos;inscrire</Link>
+                <Link className='btn-primary' href={`mailto:${data.user.email}?subject=${data.target} - ${data.itinerary}`}>S&apos;inscrire</Link>
               }
               <Link className='btn' href="/dashboard">Annuler</Link>
             </div>

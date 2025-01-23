@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
+import { deleteSession } from '@/app/lib/session'
 
 // 1. Specify protected and public routes
-const protectedRoutes = ['/dashboard']
+const protectedRoutes = ['/dashboard', '/signout']
 const publicRoutes = ['/signup', '/']
  
 export default async function middleware(req: NextRequest) {
@@ -28,6 +29,16 @@ export default async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
   }
  
+  // Signout
+  if (
+    isProtectedRoute &&
+    authToken &&
+    req.nextUrl.pathname.startsWith('/signout')
+  ) {
+    await deleteSession()
+    return NextResponse.redirect(new URL('/', req.nextUrl))
+  }
+
   return NextResponse.next()
 }
  

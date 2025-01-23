@@ -1,9 +1,10 @@
-'use client'
 import Image from "next/image";
 import Link from "next/link";
-import { signout } from "@/app/actions/auth";
+
+import { getUserName } from '@/app/lib/dal'
 
 export function Header() {
+    const userName = getUserName()
     return (
         <div className="flex flex-row items-center dark:bg-black p-2">
             <Link href="/" className="flex flex-row items-center">
@@ -17,7 +18,10 @@ export function Header() {
                         />
                 <span className="dark:text-white">Free2Top</span>
             </Link>
-            <button onClick={() => signout()} className="absolute right-2 dark:text-white">Sign out</button>
+            <div className="absolute right-2">
+                <span>{userName}</span>
+                <Link className="btn" href="/signout">Sign out</Link>
+            </div>
         </div>
     )
 }
