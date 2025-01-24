@@ -4,9 +4,12 @@ import { AppDataSource } from "../data-source";
 import { Course } from "../entity/Course";
 import { User } from "../entity/User";
 
+// create new cache instance
+const courseCache = new cache.Cache();
+
 export class CourseController {
   static async getAllCourses(req: Request, res: Response) {
-    const data = cache.get("data");
+    const data = courseCache.get("data");
     if (data) {
       console.log("serving from cache");
       return res.status(200).json({
@@ -28,7 +31,7 @@ export class CourseController {
           dateBegin: "ASC",
         },
       });
-      cache.put("data", courses, 4000);
+      courseCache.put("data", courses);
       return res.status(200).json({
         data: courses,
       });
@@ -60,6 +63,8 @@ export class CourseController {
 
     const courseRepository = AppDataSource.getRepository(Course);
     await courseRepository.save(course);
+    // Reset cache
+    courseCache.del("data")
     return res
       .status(200)
       .json({ message: "Course created successfully", course });
@@ -118,6 +123,8 @@ export class CourseController {
     course.inactive = inactive;
     
     await courseRepository.save(course);
+    // Reset cache
+    courseCache.del("data")
     return res
       .status(200)
       .json({ message: "Course updated successfully", course });
@@ -130,6 +137,8 @@ export class CourseController {
       where: { id },
     });
     await courseRepository.remove(course);
+    // Reset cache
+    courseCache.del("data")
     return res
       .status(200)
       .json({ message: "Course deleted successfully", course });
