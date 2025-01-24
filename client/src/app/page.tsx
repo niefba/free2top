@@ -33,12 +33,12 @@ export default function Home() {
         >
           <Image
             aria-hidden
-            src="/file.svg"
+            src="/window.svg"
             alt="File icon"
             width={16}
             height={16}
           />
-          Mentions légales
+          Next.js
         </a>
 
         <a

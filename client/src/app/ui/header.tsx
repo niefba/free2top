@@ -6,7 +6,7 @@ import { getUserName } from '@/app/lib/dal'
 export function Header() {
     const userName = getUserName()
     return (
-        <div className="flex flex-row items-center dark:bg-black p-2">
+        <div className="flex flex-row items-center p-2">
             <Link href="/" className="flex flex-row items-center">
                 <Image
                         className="dark:invert justify-center"
