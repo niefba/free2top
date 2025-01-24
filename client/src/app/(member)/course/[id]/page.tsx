@@ -1,5 +1,6 @@
 import { verifyToken } from '@/app/lib/dal'
 import { CourseForm } from '@/app/ui/course-form'
+import { Picto } from '@/app/ui/picto';
 import Link from 'next/link'
 
 export default async function Course({params} : { params: Promise<{ id: string }> }) {
@@ -29,6 +30,7 @@ export default async function Course({params} : { params: Promise<{ id: string }
         :
         <div className='grow max-w-3xl'>
           <h1 className='text-2xl mb-4'>
+            <Picto category={data.category} large={true}></Picto>
             {data.target} - {data.itinerary}
             <span className="pl-4 md:float-right text-stone-400">{ data.category }</span>
           </h1>

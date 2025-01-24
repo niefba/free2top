@@ -21,13 +21,14 @@ export class CourseController {
           target: true,
           itinerary: true,
           description: true,
-          dateBegin: true
+          dateBegin: true,
+          category: true
         },
         order: {
           dateBegin: "ASC",
         },
       });
-      cache.put("data", courses, 10000);
+      cache.put("data", courses, 4000);
       return res.status(200).json({
         data: courses,
       });

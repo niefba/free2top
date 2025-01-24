@@ -7,6 +7,7 @@ import { Input, Select, Textarea, Checkbox } from '@/app/ui/field-label'
 import { createCourse, updateCourse, deleteCourse } from '@/app/actions/course'
 import Link from 'next/link'
 import { CourseProps } from '@/app/lib/definitions'
+import { SKI_TOURING, TREKKING, SPLITBOARD } from '@/app/lib/constants'
 
 export function CourseForm ({id, target, itinerary, description, category, dateBegin, altitude, ascending, hours, publicTransport, dateStamm, inactive} : CourseProps) {
     // Update or create a course
@@ -14,9 +15,9 @@ export function CourseForm ({id, target, itinerary, description, category, dateB
     const [confirmDelete, setConfirmDelete] = useState(false)
     const categories : {value: string, label: string}[] = [
         { value: "", label: "" },
-        { value: "ski touring", label: "Ski de randonnée" },
-        { value: "trekking", label: "Randonnée pédestre" },
-        { value: "splitboard", label: "Splitboard" }
+        { value: SKI_TOURING, label: "Ski de randonnée" },
+        { value: TREKKING, label: "Randonnée pédestre" },
+        { value: SPLITBOARD, label: "Splitboard" }
     ];
 
     return (

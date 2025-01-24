@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { verifyToken } from "@/app/lib/dal";
 import { CourseProps } from '@/app/lib/definitions'
+import { Picto } from "@/app/ui/picto";
 
 export default async function Dashboard() {
   const authToken = await verifyToken()
@@ -34,7 +35,11 @@ function CourseRow({course}: {course: CourseProps}) {
             rounded-md
             divide-x text-zinc-500 dark:bg-stone-700 dark:text-zinc-300">
             <div className="basis-1/3 px-1">
-              <div className="font-bold">{dateBegin}</div>
+              
+              <div className="font-bold">
+                <Picto category={course.category}></Picto>
+                {dateBegin}
+              </div>
               <div>{course.target} - {course.itinerary}</div>
             </div>
             <div className="basis-2/3 px-1 pl-2 line-clamp-3">

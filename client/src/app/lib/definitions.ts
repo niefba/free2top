@@ -1,4 +1,5 @@
 import { z } from 'zod'
+import { SKI_TOURING, TREKKING, SPLITBOARD } from '@/app/lib/constants'
 
 // Signin Form Validation
 export const SigninFormSchema = z.object({
@@ -135,4 +136,4 @@ export interface CourseProps {
   inactive?: boolean
 }
 
-type CourseCategory = "" | "ski touring" | "trekking" | "splitboard";
+type CourseCategory = "" | typeof SKI_TOURING | typeof TREKKING | typeof SPLITBOARD;
