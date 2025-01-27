@@ -2,11 +2,7 @@
 
 Training project made in Lab4Tech
 
-## Initialization
-
-    docker compose -f ./compose.migration.yaml up --build
-
-## Run in Docker (dev mode)
+## Run in Docker (dev mode including migration)
 
 Run the project with Hot reloading
 
@@ -19,7 +15,7 @@ This command generates a migration file in the src/migration directory:
     cd ./restApi
     typeorm migration:create ./src/migration/users
 
-Edit the generated migration file to define the SQL query and run the migration:
+Edit the generated migration file to define the SQL query and run the migration (or re-run dev or production mode):
 
     docker compose -f ./compose.migration.yaml up --build
 
@@ -27,6 +23,6 @@ Edit the generated migration file to define the SQL query and run the migration:
 
     fnm env --use-on-cd | Out-String | Invoke-Expression
 
-## Run in Docker (productin mode)
+## Run in Docker (productin mode including migration)
 
     docker compose -f ./compose.production.yaml up --build

@@ -14,7 +14,8 @@ services:
       - ./restApi/.env
     ports:
       - 4000:4000
-    command: npm run dev
+    # Lauch service in dev mode with migration
+    command: npm run dev-migration
     develop:
       # The watch attribute automatically updates and previews your running Compose services as you edit and save your code
       # Run docker compose up --watch to build and launch a Compose project and start the file watch mode

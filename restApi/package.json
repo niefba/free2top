@@ -38,6 +38,8 @@
       "start": "NODE_PATH=./build node build/index.js",
       "build": "tsc -p .",
       "dev": "nodemon",
-      "typeorm": "typeorm-ts-node-commonjs"
+      "typeorm": "typeorm-ts-node-commonjs",
+      "dev-migration": "npm run typeorm migration:run -- -d ./src/data-source.ts && npm run dev",
+      "start-migration": "npm run typeorm migration:run -- -d ./build/data-source.js && npm run start"
    }
 }

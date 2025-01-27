@@ -15,7 +15,8 @@ services:
       - ./restApi/.env
     ports:
       - 4000:4000
-    command: npm run start
+    # Lauch service in production mode with migration
+    command: npm run start-migration
 
     # PostgreSQL database used by application. `depends_on` tells Docker Compose to
     # start the database before your application
