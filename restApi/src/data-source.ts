@@ -18,9 +18,8 @@ export const AppDataSource = new DataSource({
   password: POSTGRES_PASSWORD,
   database: POSTGRES_DB,
 
-  synchronize: NODE_ENV === "dev" ? false : false,
-//logging logs sql command on the treminal
-  logging: NODE_ENV === "dev" ? false : false,
+  synchronize: false,
+  logging: false,
   entities: [User, Course],
   migrations: [__dirname + "/migration/*.ts"],
   subscribers: [],
