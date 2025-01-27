@@ -36,7 +36,6 @@ export default async function middleware(req: NextRequest) {
     req.nextUrl.pathname.startsWith('/signout')
   ) {
     await deleteSession()
-    return NextResponse.redirect(new URL('/', req.nextUrl))
   }
 
   return NextResponse.next()

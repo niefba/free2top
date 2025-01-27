@@ -1,9 +1,11 @@
+'use server'
+
 import Image from "next/image";
 import Link from "next/link";
 
 import { getUserName } from '@/app/lib/dal'
 
-export function Header() {
+export async function Header() {
     const userName = getUserName()
     return (
         <div className="flex flex-row items-center p-2">
@@ -20,7 +22,7 @@ export function Header() {
             </Link>
             <div className="absolute right-2">
                 <span>{userName}</span>
-                <Link className="btn" href="/signout">Sign out</Link>
+                <Link className="btn" href="/signout" prefetch={false}>Sign out</Link>
             </div>
         </div>
     )
