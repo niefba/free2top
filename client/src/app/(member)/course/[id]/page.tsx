@@ -1,3 +1,5 @@
+'use server'
+
 import { verifyToken } from '@/app/lib/dal'
 import { CourseForm } from '@/app/ui/course-form'
 import { Picto } from '@/app/ui/picto';

@@ -1,3 +1,5 @@
+'use server'
+
 import Link from "next/link";
 import { verifyToken } from "@/app/lib/dal";
 import { CourseProps } from '@/app/lib/definitions'
