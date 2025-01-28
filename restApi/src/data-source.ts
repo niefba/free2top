@@ -21,6 +21,6 @@ export const AppDataSource = new DataSource({
   synchronize: false,
   logging: false,
   entities: [User, Course],
-  migrations: [__dirname + "/migration/*.ts"],
+  migrations: [__dirname + "/migration/*.ts", __dirname + "/migration/*.js"],
   subscribers: [],
 });

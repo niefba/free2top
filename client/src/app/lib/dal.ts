@@ -18,10 +18,13 @@ export const verifyToken = cache(async () => {
 
 export const getUserName = cache(async () => {
   const authToken = await verifyToken()
-  const user = await fetch(`${process.env.API_URL}/auth/profile`,  {
+  const response = await fetch(`${process.env.API_URL}/auth/profile`,  {
       method: 'GET',
       headers: { 'Authorization': `Basic ${authToken}` }
     })
-  const {firstName, lastName} = await user.json()
-  return `${firstName} ${lastName}`
+  const data = await response.json()
+  if (data.message === 'Forbidden') {
+    redirect('/signout')
+  }
+  return `${data.firstName} ${data.lastName}`
 })

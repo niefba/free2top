@@ -1,0 +1,37 @@
+# Docker Compose reference guide at
+# https://docs.docker.com/go/compose-spec-reference/
+
+include:
+  - compose.db.test.yaml # with db declared
+
+services:
+  server:
+    container_name: server_free2top
+    build:
+      context: restApi
+      dockerfile: Dockerfile
+      target: final
+    env_file:
+      - ./restApi/.env
+    ports:
+      - 4000:4000
+    # Lauch service in production mode with migration
+    command: npm run start-migration
+
+    # PostgreSQL database used by application. `depends_on` tells Docker Compose to
+    # start the database before your application
+    depends_on:
+      db:
+        condition: service_healthy
+
+  client:
+    container_name: client_free2top
+    build:
+      context: client
+      dockerfile: Dockerfile
+      target: final
+    command: npm run start
+    env_file:
+      - ./client/.env
+    ports:
+      - 3000:3000

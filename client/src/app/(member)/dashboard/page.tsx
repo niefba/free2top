@@ -33,7 +33,7 @@ function CourseRow({course}: {course: CourseProps}) {
 
     const dateBegin = new Date(course.dateBegin).toLocaleDateString('fr-FR', options)
     return (
-        <Link href={`/course/${course.id}`} className="flex flex-row bg-stone-100 m-2 p-1
+        <Link prefetch={false} href={`/course/${course.id}`} className="flex flex-row bg-stone-100 m-2 p-1
             rounded-md
             divide-x text-zinc-500 dark:bg-stone-700 dark:text-zinc-300">
             <div className="basis-1/3 px-1">
