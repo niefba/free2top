@@ -83,7 +83,7 @@ export async function signup(state: SignupFormState, formData: FormData) {
   } else {
     // Handle errors
     return {
-      message: 'Les informations saisies sont incorrects ou l\'adresse mail est déjà utilisée.'
+      message: 'Les informations saisies sont incorrectes ou l\'adresse mail est déjà utilisée.'
     }
   }
 }

@@ -65,7 +65,7 @@ export async function createCourse(state: CourseFormState, formData: FormData) {
     } else {
         // Handle errors
         return {
-          message: 'Les informations saisies sont incorrects.'
+          message: 'Les informations saisies sont incorrectes.'
         }
     }
     
@@ -130,7 +130,7 @@ export async function updateCourse(id: string, state: CourseFormState, formData:
   } else {
       // Handle errors
       return {
-        message: 'Les informations saisies sont incorrects.'
+        message: 'Les informations saisies sont incorrectes.'
       }
   }
   

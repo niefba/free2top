@@ -18,7 +18,7 @@ export function SignupForm() {
       <Input id="email" label="Identifiant" placeholder="Adresse mail" error={state?.errors?.email}></Input>
 
       <Input id="password" label="Mot de passe" type="password" error={state?.errors?.password}></Input>
-      <Input id="confirm" label="Confimation" type="password" error={state?.errors?.confirm}></Input>
+      <Input id="confirm" label="Confirmation" type="password" error={state?.errors?.confirm}></Input>
 
       { state?.message && <p className='pt-4 text-xs text-red-400 max-w-64'>{state?.message}</p>}
 
