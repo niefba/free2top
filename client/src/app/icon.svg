@@ -5,8 +5,11 @@
    viewBox="0 0 100 100"
    version="1.1"
    id="svg2"
-   sodipodi:docname="free2top-favicon.svg"
+   sodipodi:docname="icon.svg"
    inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   inkscape:export-filename="icon.png"
+   inkscape:export-xdpi="172.8"
+   inkscape:export-ydpi="172.8"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -34,24 +37,25 @@
      inkscape:pagecheckerboard="true"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="4.065"
-     inkscape:cx="76.752767"
-     inkscape:cy="64.329643"
-     inkscape:window-width="1920"
-     inkscape:window-height="1009"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
+     inkscape:cx="76.629766"
+     inkscape:cy="50.430504"
+     inkscape:window-width="1419"
+     inkscape:window-height="1032"
+     inkscape:window-x="311"
+     inkscape:window-y="36"
+     inkscape:window-maximized="0"
      inkscape:current-layer="svg2" />
   <circle
      style="fill:#000000;fill-opacity:1;stroke:none;stroke-opacity:1"
      id="path1"
-     cx="49.630997"
+     cx="50"
      cy="49.876999"
      r="49.630997" />
   <g
      id="g23"
      clip-path="url(#clipPath23)"
-     style="stroke-width:6;stroke-dasharray:none">
+     style="stroke-width:6;stroke-dasharray:none"
+     transform="translate(0.3690033)">
     <polyline
        points="10,90 50,10 90,90"
        fill="none"
@@ -59,10 +63,10 @@
        stroke-width="2"
        id="polyline1"
        transform="translate(8)"
-       style="stroke:#ffffff;stroke-opacity:1;stroke-width:6;stroke-dasharray:none" />
+       style="stroke:#ffffff;stroke-width:6;stroke-dasharray:none;stroke-opacity:1" />
     <path
        id="polyline2"
-       style="fill:none;stroke:#ffffff;stroke-width:6;stroke-opacity:1;stroke-dasharray:none"
+       style="fill:none;stroke:#ffffff;stroke-width:6;stroke-dasharray:none;stroke-opacity:1"
        d="m 1.6531365,89.926199 20.0000005,-40 8.314883,16.137761"
        sodipodi:nodetypes="ccc" />
   </g>
