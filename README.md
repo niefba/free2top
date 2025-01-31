@@ -37,6 +37,14 @@ Edit the generated migration file to define the SQL query and run the migration 
     cd ./client
     npx playwright test
 
+## Unit Testing with Jest
+> Good to know: Since async Server Components are new to the React ecosystem, Jest currently does not support them.
+
+### Launch Component Testing
+
+    cd ./client
+    npm test
+
 ## Tips
 
 ### Environment for node.js/npm commands on Windows
